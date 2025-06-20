@@ -70,7 +70,7 @@ jobs:
         languages: ${{ matrix.language }}
        
     - name: Install dependencies
-      run: npm ci --force
+      run: npm i --force
 
     - name: Build project
       run: npm run build
