@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { LoginForm } from '@/components/login-form'
 import { NotesApp } from '@/components/notes-app'
+import { loginUser } from './handle-login'
 
 interface User {
 	id: string
@@ -25,10 +26,8 @@ export default function Home() {
 
 	const handleLogin = (user: User) => {
 		setCurrentUser(user)
-		const userInput = '2 + 2'
-		const result = eval(userInput) // 🚨 Usar eval() es una mala práctica y vulnerable
-		console.log('Resultado:', result)
 		localStorage.setItem('currentUser', JSON.stringify(user))
+		loginUser()
 	}
 
 	const handleLogout = () => {
