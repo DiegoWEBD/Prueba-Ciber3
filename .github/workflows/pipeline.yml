@@ -99,9 +99,12 @@ jobs:
           unzip dependency-check-12.1.0-release.zip -d dependency-check
           ./dependency-check/dependency-check/bin/dependency-check.sh \
             --project "Prueba-Ciber3" \
-            --scan . \
             --format HTML \
             --out ./odc-report \
+            --enableExperimental \
+            --scan ./package.json \
+            --scan ./package-lock.json \
+            --nodePackageSkipDevDependencies \
             --nvdApiKey ${{ secrets.NVD_API_KEY }}
   
       - name: Subir reporte de vulnerabilidades
