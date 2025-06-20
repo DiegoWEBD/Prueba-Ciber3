@@ -102,7 +102,7 @@ jobs:
             --scan . \
             --format HTML \
             --out ./odc-report \
-            --nvdApiKey ${{ secrets.NVD_API_KEY }}
+            --noupdate
   
       - name: Subir reporte de vulnerabilidades
         uses: actions/upload-artifact@v4
