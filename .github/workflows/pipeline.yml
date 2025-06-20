@@ -138,3 +138,38 @@ jobs:
         with:
           name: docker-image
           path: miapp-ciber3.tar
+          
+  trivy-scan:
+    name: Trivy Vulnerability Scan
+    runs-on: ubuntu-latest
+    needs: docker-build
+
+    steps:
+      - name: Descargar imagen Docker
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+          path: ./docker-image
+
+      - name: Cargar imagen en Docker
+        run: |
+          docker load < ./docker-image/miapp-ciber3.tar
+
+      - name: Instalar Trivy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget apt-transport-https gnupg lsb-release
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+          echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+          sudo apt-get update
+          sudo apt-get install -y trivy
+
+      - name: Ejecutar Trivy sobre la imagen
+        run: |
+          trivy image --severity HIGH,CRITICAL --format table --output trivy-report.txt miapp-ciber3
+
+      - name: Subir reporte de Trivy
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-report
+          path: trivy-report.txt
