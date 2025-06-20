@@ -101,7 +101,8 @@ jobs:
             --project "Prueba-Ciber3" \
             --scan . \
             --format HTML \
-            --out ./odc-report
+            --out ./odc-report \
+            --nvdApiKey ${{ secrets.NVD_API_KEY }}
   
       - name: Subir reporte de vulnerabilidades
         uses: actions/upload-artifact@v4
@@ -133,7 +134,7 @@ jobs:
         run: docker save miapp-ciber3 > miapp-ciber3.tar
 
       - name: Subir imagen Docker
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image
           path: miapp-ciber3.tar
