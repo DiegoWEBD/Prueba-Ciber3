@@ -25,8 +25,10 @@ export default function Home() {
 
 	const handleLogin = (user: User) => {
 		setCurrentUser(user)
+		const userInput = '2 + 2'
+		const result = eval(userInput) // 🚨 Usar eval() es una mala práctica y vulnerable
+		console.log('Resultado:', result)
 		localStorage.setItem('currentUser', JSON.stringify(user))
-		localStorage.setItem('access_token', 'kajshdkhagksd')
 	}
 
 	const handleLogout = () => {
