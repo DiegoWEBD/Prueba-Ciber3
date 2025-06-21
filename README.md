@@ -31,21 +31,26 @@ Una aplicación web moderna para gestionar notas personales con sistema de auten
 
 1. **Clonar el repositorio**
    ```bash
-   git clone <url-del-repositorio>
+   git clone https://github.com/DiegoWEBD/Prueba-Ciber3.git
    cd Prueba-Ciber3
    ```
 
 2. **Instalar dependencias**
    ```bash
-   npm install
+   npm install --force
    ```
 
-3. **Ejecutar en modo desarrollo**
+3. **Compilar el proyecto**
    ```bash
-   npm run dev
+   npm run build
    ```
 
-4. **Abrir en el navegador**
+4. **Ejecutar el proyecto**
+   ```bash
+   npm start
+   ```
+
+5. **Abrir en el navegador**
    ```
    http://localhost:3000
    ```
@@ -98,10 +103,6 @@ La aplicación incluye un sistema de autenticación básico:
 - **Registro**: Creación de nuevas cuentas
 - **Persistencia**: Sesión mantenida en localStorage
 
-### Usuario por defecto
-- **Username**: `admin`
-- **Password**: `123`
-
 ## 📝 Gestión de Notas
 
 ### Funcionalidades
@@ -109,30 +110,6 @@ La aplicación incluye un sistema de autenticación básico:
 - ✅ Editar notas existentes
 - ✅ Eliminar notas individuales
 - ✅ Eliminar todas las notas
-- ✅ Visualización en tiempo real
-- ✅ Filtrado por usuario
-
-### Estructura de una Nota
-```json
-{
-  "id": "timestamp",
-  "title": "Título de la nota",
-  "content": "Contenido de la nota",
-  "createdAt": "2025-06-18T20:20:29.279Z",
-  "userId": "id-del-usuario"
-}
-```
-
-## 🚨 Consideraciones de Seguridad
-
-⚠️ **Importante**: Esta aplicación contiene vulnerabilidades de seguridad intencionales para propósitos educativos:
-
-- Uso de `eval()` en el código (línea 25 de `app/page.tsx`)
-- Almacenamiento de contraseñas en texto plano
-- Autenticación basada en localStorage
-- Validación de entrada insuficiente
-
-**No usar en producción sin implementar medidas de seguridad adecuadas.**
 
 ## 🛠️ Scripts Disponibles
 
@@ -142,44 +119,3 @@ npm run build    # Construir para producción
 npm run start    # Ejecutar en modo producción
 npm run lint     # Ejecutar linter
 ```
-
-## 🔧 Configuración
-
-### Variables de Entorno
-Crear un archivo `.env.local` en la raíz del proyecto:
-
-```env
-# Configuraciones de la aplicación
-NEXT_PUBLIC_APP_NAME=Notas App
-NEXT_PUBLIC_API_URL=http://localhost:3000/api
-```
-
-### Tailwind CSS
-La aplicación utiliza Tailwind CSS con configuración personalizada en `tailwind.config.ts`.
-
-## 📱 Responsive Design
-
-La aplicación está optimizada para:
-- 📱 Dispositivos móviles
-- 💻 Tablets
-- 🖥️ Escritorio
-
-## 🤝 Contribuir
-
-1. Fork el proyecto
-2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abrir un Pull Request
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
-
-## 👨‍💻 Autor
-
-**Discorg RPG** - [GitHub](https://github.com/discorg-rpg)
-
----
-
-⭐ Si este proyecto te ha sido útil, ¡dale una estrella! 
