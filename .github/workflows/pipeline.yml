@@ -80,6 +80,41 @@ jobs:
       with:
         category: "/language:${{matrix.language}}"
   
+  owasp-dependency-check:
+    name: OWASP Dependency-Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Descargar y ejecutar OWASP Dependency-Check v12.1.0 (solo NPM)
+        run: |
+          wget https://github.com/jeremylong/DependencyCheck/releases/download/v12.1.0/dependency-check-12.1.0-release.zip
+          unzip dependency-check-12.1.0-release.zip -d dependency-check
+          ./dependency-check/dependency-check/bin/dependency-check.sh \
+            --project "Prueba-Ciber3" \
+            --format HTML \
+            --out ./odc-report \
+            --enableExperimental \
+            --scan ./package.json \
+            --scan ./package-lock.json \
+            --nodePackageSkipDevDependencies \
+            --noupdate
+
+      - name: Subir reporte de vulnerabilidades
+        uses: actions/upload-artifact@v4
+        with:
+          name: owasp-report
+          path: ./odc-report
+
+  
   docker-build:
     name: Docker Build & Test
     runs-on: ubuntu-latest
